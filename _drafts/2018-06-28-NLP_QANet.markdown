@@ -1,0 +1,19 @@
+---
+title: "[NLP] QANet"
+layout: post
+headerImage: false
+category: blog
+author: huiwon
+---
+
+## QANet
+*이 포스팅은 SQuAD Leaderboard에서 현재 1위에 랭크된 MRC모델인 구글브레인의 QANet에 대한 논문을 읽고 정리한 글입니다. 원 논문은 다음 링크에서 확인할 수 있습니다. [QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension][1]
+
+### Introduction
+지금까지 대부분의 MRC(Machine Reading Comprehension)와 QA(Question Answering) 모델들은 RNN과 Attention을 기반하고 있다. (이 두 요소를 합하여 좋은 결과를 보여줬던 대표적인 모델로 BiDAF(Bidirectional Attention Flow)가 있음) 그런데 이러한 모델들이 가지는 공통적인 취약점이 있는데, RNN을 포함하고 있기 때문에  training과 inference 시간이 굉장히 길다는 것이다. 이 단점때문에 데이터셋의 크기가 제한될뿐만 아니라 real-time application으로 사용되기 부적합하다. QANet은 model architecture에서  Recurrent Nature를 완전히 제거하였다. Convolution과 Self-Attention을 포함하는 Encoder block으로 query와 context를 인코딩하는데, 이러한 모델 디자인은 Convolution이 텍스트의 local structure를 캡쳐하고, attention이 각 단어쌍의 global interaction을 학습할 것이라는 생각에서 나왔다. 이 후 구조는 일반적인 다른 모델들과 비슷하다. context-query attention 모듈이 수행되고, answer span을 찾는 구조이다. QANet은 RNN을 사용하지 않아 훨씬 빠른 수행속도를 보일 뿐만 아니라, 더 높은 정확도를 보여 SOTA를 기록하고 있다.
+
+ 
+
+
+
+[1]:https://arxiv.org/abs/1804.09541
