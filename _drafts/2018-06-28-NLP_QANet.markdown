@@ -10,10 +10,27 @@ author: huiwon
 *이 포스팅은 SQuAD Leaderboard에서 현재 1위에 랭크된 MRC모델인 구글브레인의 QANet에 대한 논문을 읽고 정리한 글입니다. 원 논문은 다음 링크에서 확인할 수 있습니다. [QANet: Combining Local Convolution with Global Self-Attention for Reading Comprehension][1]
 
 ### Introduction
-지금까지 대부분의 MRC(Machine Reading Comprehension)와 QA(Question Answering) 모델들은 RNN과 Attention을 기반하고 있다. (이 두 요소를 합하여 좋은 결과를 보여줬던 대표적인 모델로 BiDAF(Bidirectional Attention Flow)가 있음) 그런데 이러한 모델들이 가지는 공통적인 취약점이 있는데, RNN을 포함하고 있기 때문에  training과 inference 시간이 굉장히 길다는 것이다. 이 단점때문에 데이터셋의 크기가 제한될뿐만 아니라 real-time application으로 사용되기 부적합하다. QANet은 model architecture에서  Recurrent Nature를 완전히 제거하였다. Convolution과 Self-Attention을 포함하는 Encoder block으로 query와 context를 인코딩하는데, 이러한 모델 디자인은 Convolution이 텍스트의 local structure를 캡쳐하고, attention이 각 단어쌍의 global interaction을 학습할 것이라는 생각에서 나왔다. 이 후 구조는 일반적인 다른 모델들과 비슷하다. context-query attention 모듈이 수행되고, answer span을 찾는 구조이다. QANet은 RNN을 사용하지 않아 훨씬 빠른 수행속도를 보일 뿐만 아니라, 더 높은 정확도를 보여 SOTA를 기록하고 있다.
+지금까지 대부분의 MRC(Machine Reading Comprehension)와 QA(Question Answering) 모델들은 RNN과 Attention을 기반하고 있다. (이 두 요소를 합하여 좋은 결과를 보여줬던 대표적인 모델로 [BiDAF][2](Bidirectional Attention Flow)가 있음) 그런데 이러한 모델들이 가지는 공통적인 취약점이 있는데, RNN을 포함하고 있기 때문에  training과 inference 시간이 굉장히 길다는 것이다. 이 단점때문에 데이터셋의 크기가 제한될뿐만 아니라 real-time application으로 사용되기 부적합하다. QANet은 model architecture에서  Recurrent Nature를 완전히 제거하였다. Convolution과 Self-Attention을 포함하는 Encoder block으로 query와 context를 인코딩하는데, 이러한 모델 디자인은 Convolution이 텍스트의 local structure를 캡쳐하고, attention이 각 단어쌍의 global interaction을 학습할 것이라는 생각에서 나왔다. 이 후 구조는 일반적인 다른 모델들과 비슷하다. context-query attention 모듈이 수행되고, answer span을 찾는 구조이다. QANet은 RNN을 사용하지 않아 훨씬 빠른 수행속도를 보일 뿐만 아니라, 더 높은 정확도를 보여 SOTA를 기록하고 있다.
 
- 
+### The Model
+#### Problem formultation
+RC task는 Context $$C= \left\{ c_1, c_2, ..., c_n \right\}$$ 와 Query $$Q= \left\{ q_1, q_2, ..., q_m \right\}$$ 이 주어졌을 때 answer span $$S= \left\{ c_i, c_i+1, ..., c_{i+j} \right\}$$ 를 찾는 것이다.
 
+#### Model Overview
+![model](/assets/images/qanet/model.png)  
+
+기존 모델처럼 emberdding layer, embedding encoder layer, context-query attention layer, model encoder layer, output layer로 구성되는 것은 유사하나 RNN을 전혀 사용하지 않고 오직 self-attention convolution만을 사용했다는 점이 다르다.  
+**1.Input Embedding layer**  
+context와 query가 각각 input embedding layer를 통과한다. 일단 전처리로 단어 길이를 패딩이나 슬라이스하여 16으로 고정시킨다. glove word vector와 conv1d를 통과한 character embedding을 concat한 후 bidaf처럼 two-layer highway network를 통과시킨다. (unk embedding은 학습되면서 조정된다. unk emb matrix와 glove emb matrix를 따로 잡으면 unk embedding만 학습시킬 수 있다.) character embedding dimention 과 convolution filter 개수는 각각 200이다. filter size에 대한 설명은 없지만, biDAF와 같다면 5일 것으로 예상한다.  
+**2.Embedding Encoder layer**  
+encoder layer는 [convolution X # + self-attention + feed-forward]으로 구성된 building block을(위 그림에서 오른쪽) stacking한 구조이다. convolution은 Xception에서 사용된 depthwise convolution을 사용하고, self-attention은 [transformer][3]에서 사용된 multi-head attention을 사용한다. residual block을 적용하기 위해 residual block을 들어가기 전 1d conv를 통과시켜줘서 layer out dimention을 맞춘다.  
+**3.Context-Query Attention layer**  
+Context-Query Attention은 이전 mrc 모델들에서 표준처럼 사용되는 모듈이다. context와 query의 similarity를 계산하여 $$S\in{n\mathsf{x}m} $$ 를 얻고, $$S$$의 row에 softmax를 적용하여 $$ \overline{S} $$ 를, $$S$$의 column에 softmax를 적용하여 $$ \overline{\overline{S}} $$ 을 얻는다. 
+4.Model Encoder layer
+
+5.Output Layer
 
 
 [1]:https://arxiv.org/abs/1804.09541
+[2]:https://arxiv.org/abs/1611.01603
+[3]:https://arxiv.org/abs/1706.03762
