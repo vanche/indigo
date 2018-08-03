@@ -6,7 +6,7 @@ category: blog
 author: huiwon
 ---
 
-몇 달전쯤 reddit에 "Lessons from My First Two Years of AI Research"이란 제목의 블로그 포스팅이 소개되었다. 공감가는 경험과 조언이 인상깊어서 요약해서 정리한다. 전문은 [원본링크][1]에서 확인할 수 있다.  
+몇 달전쯤 reddit에 "Lessons from My First Two Years of AI Research"이란 제목의 블로그 포스팅이 소개되었다. 공감가는 경험과 조언이 인상깊어서 요약해서 정리한다. 전문은 \[원본링크]\[1]에서 확인할 수 있다.  
 이 포스팅은 저자가 AI분야의 커리어를 시작하는 친구에게 하는 조언이다.
 
 ## Starting out
@@ -23,22 +23,22 @@ author: huiwon
 
 ## Drinking from the research community firehose
 #### 논문 찾기
-[arXiv][2] : AI 페이퍼는 아카이브에서 쉽게 접할 수 있다.
-[arXiv sanity preserver][3] : Adrej Karpathy의 사이트로 arXiv의 논문들을 검색하거나 필터링하는데 도움된다.
-[Miles Bundage][4] : Miles Bundage의 트위터
-[Brundage Bot][5] : Miles Bundage의 봇
-[r/MachineLearning][6] : 머신러닝 레딧
-[Import AI][7] : Jack Clark의 주간 뉴스레터
-[The Wild Week in AI][8] : Denny Britz의 주간 뉴스레터
-[NIPS][9] / [ICML][10] / [ICLR][11] : big conference
-[AAAI][12] / [IJCAI][13] / [UAI][14] : reputable general-audience conferences
-[CVPR][15] / [ECCV][16] / [ICCV][17] : computer vision
-[ACL][18] / [EMNLP][19] / [NAACL][20] : nlp
-[CoRL][21] / [ICAPS][22] / [ICRA][23] / [IROS][24] / [RSS][25] :robotics
-[AISTATS][26] / [COLT][27] / [KDD][28] : theoretical work
-[JAIR][29] / [JMLR][30] : journals
-[Nature][31] / [Science][32] :general scientific journals
-[Google scholar][33]
+[arXiv][2] : AI 페이퍼는 아카이브에서 쉽게 접할 수 있다.  
+[arXiv sanity preserver][3] : Adrej Karpathy의 사이트로 arXiv의 논문들을 검색하거나 필터링하는데 도움된다.  
+[Miles Bundage][4] : Miles Bundage의 트위터  
+[Brundage Bot][5] : Miles Bundage의 봇  
+[r/MachineLearning][6] : 머신러닝 레딧  
+[Import AI][7] : Jack Clark의 주간 뉴스레터  
+[The Wild Week in AI][8] : Denny Britz의 주간 뉴스레터  
+[NIPS][9] / [ICML][10] / [ICLR][11] : big conference  
+[AAAI][12] / [IJCAI][13] / [UAI][14] : reputable general-audience conferences  
+[CVPR][15] / [ECCV][16] / [ICCV][17] : computer vision  
+[ACL][18] / [EMNLP][19] / [NAACL][20] : nlp  
+[CoRL][21] / [ICAPS][22] / [ICRA][23] / [IROS][24] / [RSS][25] :robotics  
+[AISTATS][26] / [COLT][27] / [KDD][28] : theoretical work  
+[JAIR][29] / [JMLR][30] : journals  
+[Nature][31] / [Science][32] :general scientific journals  
+[Google scholar][33]  
 
 #### 논문을 읽는데 얼마나 많은 시간을 쏟아야 하는가?
 저자는 시간이 되는한 가능한 많은 페이퍼를 읽어야한다고 생각한다고 적었다. 문제에 대한 신선한 관점은 핵심키가 될수도 있으나 career researcher는 이러한 fortunate jump에 의존할 수 없다. 관련 논문들을 읽는 것은 우리의 현재 위치와 다음에 시도해볼 것을 파악할 효율적인 방법이 될것이다. 하나 더 중요한 것이 있다. 논문을 읽는것만큼 그것을 소화시키는 것이 중요하다. 소수의 논문을 주의깊게 읽는 것이 좋다.
@@ -61,7 +61,7 @@ author: huiwon
 
 
 
-[1] http://web.mit.edu/tslvr/www/lessons_two_years.html
+\[1] http://web.mit.edu/tslvr/www/lessons_two_years.html
 [2] https://arxiv.org/
 [3] http://arxiv-sanity.com/
 [4] https://twitter.com/Miles_Brundage
