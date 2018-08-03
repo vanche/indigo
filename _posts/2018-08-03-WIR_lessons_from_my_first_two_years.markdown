@@ -6,7 +6,7 @@ category: blog
 author: huiwon
 ---
 
-몇 달전쯤 reddit에 "Lessons from My First Two Years of AI Research"이란 제목의 블로그 포스팅이 소개되었다. 공감가는 경험과 조언이 인상깊어서 요약해서 정리한다. 전문은 \[원본링크]\[1]에서 확인할 수 있다.  
+몇 달전쯤 reddit에 "Lessons from My First Two Years of AI Research"이란 제목의 블로그 포스팅이 소개되었다. 공감가는 경험과 조언이 인상깊어서 요약해서 정리한다. 전문은 [원본링크](http://web.mit.edu/tslvr/www/lessons_two_years.html)에서 확인할 수 있다.  
 이 포스팅은 저자가 AI분야의 커리어를 시작하는 친구에게 하는 조언이다.
 
 ## Starting out
@@ -23,24 +23,24 @@ author: huiwon
 
 ## Drinking from the research community firehose
 #### 논문 찾기
-[arXiv][2] : AI 페이퍼는 아카이브에서 쉽게 접할 수 있다.  
-[arXiv sanity preserver][3] : Adrej Karpathy의 사이트로 arXiv의 논문들을 검색하거나 필터링하는데 도움된다.  
-[Miles Bundage][4] : Miles Bundage의 트위터  
-[Brundage Bot][5] : Miles Bundage의 봇  
-[r/MachineLearning][6] : 머신러닝 레딧  
-[Import AI][7] : Jack Clark의 주간 뉴스레터  
-[The Wild Week in AI][8] : Denny Britz의 주간 뉴스레터  
-[NIPS][9] / [ICML][10] / [ICLR][11] : big conference  
-[AAAI][12] / [IJCAI][13] / [UAI][14] : reputable general-audience conferences  
-[CVPR][15] / [ECCV][16] / [ICCV][17] : computer vision  
-[ACL][18] / [EMNLP][19] / [NAACL][20] : nlp  
-[CoRL][21] / [ICAPS][22] / [ICRA][23] / [IROS][24] / [RSS][25] :robotics  
-[AISTATS][26] / [COLT][27] / [KDD][28] : theoretical work  
-[JAIR][29] / [JMLR][30] : journals  
-[Nature][31] / [Science][32] :general scientific journals  
-[Google scholar][33]  
+[arXiv](https://arxiv.org/) : AI 페이퍼는 아카이브에서 쉽게 접할 수 있다.  
+[arXiv sanity preserver](http://arxiv-sanity.com/) : Adrej Karpathy의 사이트로 arXiv의 논문들을 검색하거나 필터링하는데 도움된다.  
+[Miles Bundage](https://twitter.com/Miles_Brundage) : Miles Bundage의 트위터  
+[Brundage Bot](https://twitter.com/BrundageBot) : Miles Bundage의 봇  
+[r/MachineLearning](https://www.reddit.com/r/MachineLearning/) : 머신러닝 레딧  
+[Import AI](https://jack-clark.net/) : Jack Clark의 주간 뉴스레터  
+[The Wild Week in AI](https://www.getrevue.co/profile/wildml) : Denny Britz의 주간 뉴스레터  
+[NIPS](https://nips.cc/) / [ICML](https://icml.cc/) / [ICLR](https://iclr.cc/) : big conference  
+[AAAI](https://aaai.org/Conferences/AAAI-18/) / [IJCAI](https://www.ijcai-18.org/) / [UAI](http://auai.org/uai2018/index.php) : reputable general-audience conferences  
+[CVPR](http://cvpr2018.thecvf.com/) / [ECCV](https://eccv2018.org/) / [ICCV](http://iccv2017.thecvf.com/) : computer vision  
+[ACL](https://acl2018.org/) / [EMNLP](http://emnlp2018.org/) / [NAACL](http://naacl2018.org/) : nlp  
+[CoRL](http://www.robot-learning.org/) / [ICAPS](http://icaps18.icaps-conference.org/) / [ICRA](http://www.icra2017.org/) / [IROS](https://www.iros2018.org/) / [RSS](http://www.roboticsconference.org/) :robotics  
+[AISTATS](https://www.aistats.org/) / [COLT](http://www.learningtheory.org/colt2018/) / [KDD](http://www.kdd.org/kdd2018/) : theoretical work  
+[JAIR](https://jair.org/index.php/jair) / [JMLR](http://jmlr.org/) : journals  
+[Nature](https://www.nature.com/) / [Science](http://www.sciencemag.org/) :general scientific journals  
+[Google scholar](https://scholar.google.co.kr/)  
 
-#### 논문을 읽는데 얼마나 많은 시간을 쏟아야 하는가?
+#### 논문을 읽는데 얼마나 많은 []시간을 쏟아야 하는가?
 저자는 시간이 되는한 가능한 많은 페이퍼를 읽어야한다고 생각한다고 적었다. 문제에 대한 신선한 관점은 핵심키가 될수도 있으나 career researcher는 이러한 fortunate jump에 의존할 수 없다. 관련 논문들을 읽는 것은 우리의 현재 위치와 다음에 시도해볼 것을 파악할 효율적인 방법이 될것이다. 하나 더 중요한 것이 있다. 논문을 읽는것만큼 그것을 소화시키는 것이 중요하다. 소수의 논문을 주의깊게 읽는 것이 좋다.
 
 #### Conversation >> videos > papers > conference talks
@@ -58,39 +58,3 @@ author: huiwon
 #### 적어라!
 
 #### 정신/신체건가은 연구의 전제조건이다.
-
-
-
-\[1] http://web.mit.edu/tslvr/www/lessons_two_years.html
-[2] https://arxiv.org/
-[3] http://arxiv-sanity.com/
-[4] https://twitter.com/Miles_Brundage
-[5] https://twitter.com/BrundageBot
-[6] https://www.reddit.com/r/MachineLearning/
-[7] https://jack-clark.net/
-[8] https://www.getrevue.co/profile/wildml
-[9] https://nips.cc/
-[10] https://icml.cc/
-[11] https://iclr.cc/
-[12] https://aaai.org/Conferences/AAAI-18/
-[13] https://www.ijcai-18.org/
-[14] http://auai.org/uai2018/index.php
-[15] http://cvpr2018.thecvf.com/
-[16] https://eccv2018.org/
-[17] http://iccv2017.thecvf.com/
-[18] https://acl2018.org/
-[19] http://emnlp2018.org/
-[20] http://naacl2018.org/
-[21] http://www.robot-learning.org/
-[22] http://icaps18.icaps-conference.org/
-[23] http://www.icra2017.org/
-[24] https://www.iros2018.org/
-[25] http://www.roboticsconference.org/
-[26] https://www.aistats.org/
-[27] http://www.learningtheory.org/colt2018/
-[28] http://www.kdd.org/kdd2018/
-[29] https://jair.org/index.php/jair
-[30] http://jmlr.org/
-[31] https://www.nature.com/
-[32] http://www.sciencemag.org/
-[33] https://scholar.google.co.kr/
