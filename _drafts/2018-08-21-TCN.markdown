@@ -1,0 +1,17 @@
+---
+title: "An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling"
+layout: post
+headerImage: false
+category: blog
+author: huiwon
+---
+
+최근 NLP 트렌드가 RNN을 CNN이나 Attention 등으로 대체하는 것이다. 이에 대한 흥미로운 포스팅으로 [The fall of RNN / LSTM][1]이 있었다. 실제 MT에서 [Transformer: Attention is All You][2] Need)나 QA에서 [QANet][3]이 등장하여 RNN을 사용하지 않고도 SOTA를 차지헀다. 앞으로 이러한 트렌드가 계속될까? CMU에서 CNN과 RNN을 비교하는 [An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling][4]이 나와서 이를 정리한다.
+
+
+
+
+[1]:https://developers.google.com/machine-learning/rules-of-ml/
+[2]:https://arxiv.org/abs/1706.03762
+[3]:https://arxiv.org/abs/1804.09541
+[4]:https://arxiv.org/abs/1803.01271
