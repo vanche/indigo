@@ -1,5 +1,5 @@
 ---
-title: "[WIR] 내가 AI 연구를 한 첫 2년 동안 배운 교훈들"
+title: "[WIR] 내가 AI 연구를 한 첫 2년 동안 배운 교훈들 by Tom Silver"
 layout: post
 headerImage: false
 category: blog
