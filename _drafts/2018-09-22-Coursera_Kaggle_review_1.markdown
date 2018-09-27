@@ -89,3 +89,16 @@ GBDT는 $m+1$번째 트리를 기존 모델을 향상시키도록 다음의 식 
 
 ### Assignment
 1주차 assignment에서는 "Predict Future Sales"이라는 kaggle playground prediction competition의 데이터를 이용해 문제의 답을 구하는 것이다. pandas를 이용해서 데이터를 가공할 수 있어야 문제를 풀 수 있다. EDA를 통해 data특성을 하나하나 보여주는 것이 아니라 문제를 통해 데이터를 가공할 방법을 접근하도록 하여 데이터를 파악하게 해준다.
+
+### Feature preprocessing and generation with respect to models
+#### Numeric features
++ preoprocessing : scaling
+tree-based model의 경우 feature scale에 영향을 받지 않는다. 반면 knn, linear models, neural networks와 같은 non-tree-based model의 경우는 다르다. 예를 들어 2차원 평면 위의 좌표를 knn을 통해 classification하는 경우, x좌표값에 특정값을 곱하면 결과가 달라질 수 있다. gradient descent method의 경우에도 적절한 스케일링 필요하다.  
+feature scaling에 따라 모델의 결과가 다를수 있다.
+  1. To [0, 1]
+  $$ X=(X-X.min())/(X.max()-X.min()) $$
+  이러한 feature들을 다루는 가장 쉬운 방법은 feature를 MinMaxScaler를 이용해 same scale로 리스케일링하는것이다.(즉 value범위가 0~1사이에 위치하게 되면서 distribution은 변하지 않는다.)
+  2. To mean=0, std=1
+  $$ X = (X-X.mean())/X.std() $$
+  StandardScaler를 사용할 수도 있다.
+모든 feature를 하나의 방식으로 스케일링해야 feature는 비슷하게 모델에 영향을 끼치게 된다.
