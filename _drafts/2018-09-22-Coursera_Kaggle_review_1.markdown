@@ -92,7 +92,7 @@ GBDT는 $m+1$번째 트리를 기존 모델을 향상시키도록 다음의 식 
 
 ### Feature preprocessing and generation with respect to models
 #### Numeric features
-+ preoprocessing : scaling
++ Preprocessing : scaling
 tree-based model의 경우 feature scale에 영향을 받지 않는다. 반면 knn, linear models, neural networks와 같은 non-tree-based model의 경우는 다르다. 예를 들어 2차원 평면 위의 좌표를 knn을 통해 classification하는 경우, x좌표값에 특정값을 곱하면 결과가 달라질 수 있다. gradient descent method의 경우에도 적절한 스케일링 필요하다.  
 feature scaling에 따라 모델의 결과가 다를수 있다.
   1. To [0, 1]
@@ -101,4 +101,14 @@ feature scaling에 따라 모델의 결과가 다를수 있다.
   2. To mean=0, std=1
   $$ X = (X-X.mean())/X.std() $$
   StandardScaler를 사용할 수도 있다.
-모든 feature를 하나의 방식으로 스케일링해야 feature는 비슷하게 모델에 영향을 끼치게 된다.
+모든 feature를 하나의 방식으로 스케일링해야 feature는 비슷하게 모델에 영향을 끼치게 된다.  
++ Preprocessing : outlier
+linear모델에서 outlier 값을 처리해주기 위해서 lower, upper bound를 넘어가는 값을 clipping해줘야 한다. 예를 들면 1%, 99%를 기준으로 처리할 수 있는데, 이러한 방식의 clipping은 financial data에 잘 사용되고 winsorization이라고 부른다.
++ Preprocessing : rank
+rank transformation은 outlier가 있으면 MinMaxScaler보다 나을 수 있다. outlier를 수동적으로 조작하기 힘들다면 rank transformation으로 linear model, knn , neural network와 같은 모델에 적용하여 이익을 볼 수 있다. scipy.stats.rankdata로 rankdata를 적용할 수 있고, rankdata를 train data뿐만 아니라 test data 또한 함께 이용해야함을 주의해야 한다.
++ Preprocessing
+다음과 같은 transform으로 너무 큰 값을 가지고 있는 데이터를 처리할 수 있다.
+  1. Log transform : np.log(1+x)
+  2. Raising to the power < 1:  np.sqrt(x+2/3)
++ Feature generation
+선지식이나 EDA를 통해 얻은 지식이나 직관력을 바탕으로 new feature를 만들 수 있다. 예를 들어 부동산의 크기와 가격을 바탕으로 평당가격이라는 새로운 feature를 만들 수 있다. 이런식으로 생성한 feature는 linear model 뿐만 아니라 다른 모델에도 효과적이다. 왜냐면 gradient boostring decision tree도 multiplication이나 division과 같은 approximation에 어려움을 겪기 때문이다. feature generatoin의 또 다른 예는 price의 fractional_part를 뽑는 것이다.
