@@ -1,0 +1,37 @@
+---
+title: "An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling"
+layout: post
+headerImage: false
+category: blog
+author: huiwon
+---
+
+최근 NLP 트렌드가 RNN을 CNN이나 Attention 등으로 대체하는 것이다. 이에 대한 흥미로운 포스팅으로 [The fall of RNN / LSTM][1]이 있었다. 실제 MT에서 [Transformer: Attention is All You][2] Need)나 QA에서 [QANet][3]이 등장하여 RNN을 사용하지 않고도 SOTA를 차지헀다. 앞으로 이러한 트렌드가 계속될까? CMU에서 CNN과 RNN을 비교하는 논문[An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling][4]이 나와서 이를 정리한다.
+
+### Abstract
+그동안 sequence modeling과 RNN은 동일어처럼 여겨졌다. 하지만 최근 연구들에서 CNN 구조만으로도 RNN을 능가하는 결과들을 보여줬다. 이 paper는 다양한 task에서 간단한 CNN구조로 LSTM같은 RNN기반의 모델들보다 더 좋은 성능을 확인함으로써 Sequence modeling과 RNN사이의 관계를 다시 재고해야 함을 시사한다.
+
+### Intorudction
+DL분야 종사자들은 RNN을 Sequence modeling의 default starting pointing으로 여겨왔다. (Goodfellow의 deep learning book의 sequence modeling 파트나 andrew ng의 coursera강의에서도 rnn을 포커스한다.) 그러나 최근 audio synthesis, word-level language modeling, machine traㅜslation([van den Oord et al., 2016][5]; [Kalchbrenner et al., 2016][6]; [Dauphin et al., 2017][7]; [Gehring et al., 2017a][8];[b][9]) CNN 모델로 state-of-the-art에 도달함을 보였다. 이러한 CNN 구조의 성공적인 성과는 특정한 도메인에 한정된 것인지, 아니면 sequence modeling과 RNN구조의 연관성을 재고할 필요가 있는지에 대한 의문을 던진다. 이 paper에서는 temporal convolutional network(TCN)구조를 정의하여 여러 task에 적용시켜 본다. 결과적으로 TCN은 Sequence Modeling task에서 RNN기반 모델들을 능가하였다. 또한 RNN의 longer history를 캡처하는 구조처럼 TCN 또한 longer memory에 적합함은 보였다.
+
+### Background
+RNN의 역사와 CNN과 RNN을 결합한 연구들, 그리고 기존의 RNN과 CNN을 비교한 연구들을 소개한다.
+
+### Temporal Convolutional networks
+generic architecture로 TCN을 정의한다. TCN은 새로운 model을 정의한 이름이 아닌 기존 architectore의 집합체를 정의하는 이름으로 사용함을 미리 알린다. TCN은 simplicity, autoregressive prediction, very long term memory를 모두 갖추는 구조로 디자인되었다.
+#### Seqeunce modeling
+
+
+
+
+
+
+[1]:https://developers.google.com/machine-learning/rules-of-ml/
+[2]:https://arxiv.org/abs/1706.03762
+[3]:https://arxiv.org/abs/1804.09541
+[4]:https://arxiv.org/abs/1803.01271
+[5]:https://arxiv.org/abs/1609.03499 WaveNet: A generative model for raw audio. arXiv:1609.03499, 2016
+[6]:https://arxiv.org/pdf/1610.10099.pdf Neural machine translation in linear time. arXiv:1610.10099, 2016.
+[7]:https://arxiv.org/abs/1612.08083 Language modeling with gated convolutional networks. In ICML, 2017
+[8]:https://arxiv.org/abs/1611.02344 A convolutional encoder model for neural machine translation. In ACL, 2017a
+[9]:https://arxiv.org/abs/1705.03122 Convolutional Sequence to Sequence Learning

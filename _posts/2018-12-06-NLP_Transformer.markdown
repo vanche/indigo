@@ -34,7 +34,7 @@ $$MultiHead(Q,K,V) = Concat(head_1, ..., head_h)W^O$$ $$head_i = Attention(QW_i^
 #### Application of Attention in our model
 * encoder-decoder attention: query는 이전 decoder layer에서 오고, memory key와 value는 encoder의 output이다.(즉 key와 value는 동일한 값을 가진다.) 즉 decoder의 모든 위치에서 input sequence의 전체 position에 대해 attend가 가능하다.
 * self-attention layer of encoder: self-attention layer에서 query, key, value는 encoder의 이전 layer에서 나온 output이다.
-* self-attention layer of decoder: 각 위치에서 각각의 위치까지 attend가 가능하다. 즉 왼쪽 정보만을 보기 위해서 나머지 부분을 $-\infty$로 masking한다.
+* self-attention layer of decoder: 각 위치에서 각각의 위치까지 attend가 가능하다. 즉 왼쪽 정보만을 보기 위해서 나머지 부분을 $-\infty$로 masking한다.  
 #### Point-wise Feed-Forward Networks
 attention sublayer를 통과한 후 fully connected feed-forward network를 통과한다. ReLU를 사이에 둔 두 linear transformation으로 구성된다.$$FFN(x)=max(0,xW_1+b_1)W_2+b_2$$
 #### Embedding and softmax
@@ -49,6 +49,6 @@ transformer가 rnn이나 cnn을 포함하지 않으므로 문장의 구조를 �
 * WMT 2014 English-German dataset을 학습시킬 땐 sentence를 byte-pair encoding으로 인코딩하였다. WMT 2015 English-Franch를 학습시킬때는 toekn을 word-piece로 쪼개어서 학습하였따.
 * 8 NVIDIA P100 GPU로 base model의 경우 12시간(100K step), large model의 경우 3.5일(300K step)이 걸렸다.
 * warmup을 적용한 adam optimizer를 사용하였다.
-* dropout, label smoothing의 regularization 기법을 사용하였다.
+* dropout, label smoothing의 regularization 기법을 사용하였다.  
 ### Results
 english-to-german task에서 28.4 BLEU score로 SOTA를 english-to-franch task에서 41.0 BLEU score로 SOTA를 찍었다.
