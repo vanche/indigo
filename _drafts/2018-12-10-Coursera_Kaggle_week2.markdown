@@ -5,7 +5,30 @@ headerImage: false
 category: blog
 author: huiwon
 ---
-
+### Exploratory data analysis
+2주차에서는 대회 풀이 과정에 필수적인 요소인 EDA에 다룬다. 또한 competition setup에 따라 validation을 어떻게 디자인하는지 살펴보고, data competition에서 매우 독특한 주제인 data leakage에 대한 내용을 커버한다.
+#### Overview
+EDA에서 다룰 내용들은 다음과 같다.
+1. EDA가 무엇이고 왜 필요한지
+2. things to explore
+3. exploration and visualization tools
+4. dataset cleaning
+5. Kaggle competition EDA  
+#### Exploratory Data Analysis (EDA)
+EDA란 데이터를 분석하고 이해하는 과정이다. competition에선 powerful feature를 만들어 더 정확한 모델을 설계할 수 있어야 한다. 데이터를 분석하면서, 데이터에 대한 직관력을 얻고 이를 통해서 가능한 새로운 feature에 대한 가정을 만들 수 있다. raw competition에 경우 EDA가 특별히 도움되진 않을 수 있다. 이 경우엔 모델링과 서버를 만드는데 시간을 더 들이는게 낫다.
+#### Visualizations
+데이터를 시각화하여, 패턴을 읽고 이 패턴을 어떻게 이용할지 생각해 볼 수 있다.
+#### Motivating examples
+data를 잘 이해했다면 어떤 모델링도 필요없었던 대회도 있었다. 이 대회의 목적은 사람들이 company가 제공한 promo를 어떻게 이용할지 예측하는 대회였다. data의 row는 각 사람들에게 제공한 promo에 대한 정보와 person에 대한 정보(성별, 나이, 결혼유무 등)와 target(0 or 1)값을 가지고 있었다. column feature 중 #promos sent(현재까지 보내진 promo수) feature와 #promos used(이전까지 사용된 promos)가 있었다.  
+| id | ... | # promos sent | # promos used |                diff                | used this promo? |
+|:--:|:---:|:-------------:|:-------------:|:----------------------------------:|:----------------:|
+| 13 | ... |       0       |       0       | <span style="color:green">1</span> |         1        |
+| 13 | ... |       1       |       1       | <span style="color:green">0</span> |         0        |
+| 13 | ... |       2       |       1       |  <span style="color:red">1</span>  |         0        |
+| 13 | ... |       4       |       2       | <span style="color:green">1</span> |         1        |
+| 13 | ... |       5       |       3       | <span style="color:green">0</span> |         0        |
+| 13 | ... |       6       |       3       | <span style="color:red">NaN</span> |         0        |  
+위 표처럼 id에 대하여 정렬할 경우, diff feature(인접한 row간 promos used 차이)를 만들 수 있었고, 이 feature만을 사용하여 80%의 정답률을 가질 수 있었다. (missing data나 NaN데이터를 어떻게 처리하냐의 문제가 남아있긴했지만, 어떤 classifier도 사용않고도 높은 acc를 얻을 수 있었다.) 이러한 featrue는 EDA없이는 생성될 수 없다. 한편 위와 같은 문제는 organizer가 데이터를 준비하는 과정에서 일어나는 실수에 의해 발생하는데, 이를 leak이라 하며 competition 상에서 이용이 허락된다.
 ### Data leakages
 Data leakages는 간단히 leaks라고도 불리는데, 데이터의 예상치못한 정보로 인해 비현실적으로 좋은 예측을 만드는 경우를 말한다. 직간접적으로 ground truth가 test data에 추가된 경우가 그렇다. 대체로 실수나 사고에 의해 발생된다.
 #### Leaks in time seires
