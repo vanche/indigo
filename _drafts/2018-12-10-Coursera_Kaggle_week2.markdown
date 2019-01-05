@@ -29,6 +29,17 @@ data를 잘 이해했다면 어떤 모델링도 필요없었던 대회도 있었
 | 13 | ... |       5       |       3       | <span style="color:green">0</span> |         0        |
 | 13 | ... |       6       |       3       | <span style="color:red">NaN</span> |         0        |  
 위 표처럼 id에 대하여 정렬할 경우, diff feature(인접한 row간 promos used 차이)를 만들 수 있었고, 이 feature만을 사용하여 80%의 정답률을 가질 수 있었다. (missing data나 NaN데이터를 어떻게 처리하냐의 문제가 남아있긴했지만, 어떤 classifier도 사용않고도 높은 acc를 얻을 수 있었다.) 이러한 featrue는 EDA없이는 생성될 수 없다. 한편 위와 같은 문제는 organizer가 데이터를 준비하는 과정에서 일어나는 실수에 의해 발생하는데, 이를 leak이라 하며 competition 상에서 이용이 허락된다.
+### Building Intuition about the data
+#### Get domian knoledge
+Kaggle에서는 다양한 도메인의 문제를 다룬다. 그 도메인의 깊은 지식이 꼭 필요하진 않다. 다만, 우리의 목적과 우리가 가진 데이터를 이해하고, 베이스라인을 세우기 위해 사람들이 주로 이러한 문제를 어떻게 접근하는지 알 필요가 있다.
+#### Check if the data is intuitive
+age 데이터에서 200살이 넘은 데이터가 있는 경우, Google Ads Data에서 Impression(노출된 횟수) < Clik수 인 경우 데이터에 버그가 있는 경우일 것이다. 후자의 예는 전자의 예와는 다르게 random하게 발생된 버그가 아닐 수 있다. data exporting script나 다른 알고리즘에 의하여 발생한 것일 수 있다. 이러한 실수를 이용하여 is_incorrect라는 새 feaure를 만들어 더 좋은 score를 얻을 수도 있다.  
+#### Understand how the data was generated
+데이터가 어떻게 생성되는지 이해하는 것도 중요하다. 데이터는 랜덤하게 샘플링될 수도 있고, 데이터 클래스의 균형을 맞추기 위해서 oversampling되었을 수도 있다. 데이터가 어떻게 생성되었는지 파악해야 적절한 validataion scheme을 세울 수 있다. 만약 test set과 train set이 다를 경우(distribution이?), validation set이 test set의 respresentation과 맞지 않을 수 있다. 즉 CV에서 향상되었으나 LB에서는 그렇지 않을 경우, 혹은 CV보다 이상하게 LB score가 높을 경우가 발생할 수 있다.
+### Exploring anonymized data
+데이터는 익명화되어 주어지기도 한다. 예를 들어 organizer가 text 데이터를 공개하길 꺼려할 경우 text data는 hash처리되어 주어진다. (이렇게 변환되도 bag of word를 base로 하는 모델은 달라지지 않는다.) 정형데이터의 테이블의 column(과 이름)이 익명화될 수도 있다. 이 경우 data를 decode하거나 de-anonymize를 시도해 볼 수도 있다. 이것이 불가능한 경우에도 feature의 타입을 추측하여 numeric, categorical 타입등으로 분류할 수 있다. 그리고, feature들 간의 관계를 조사하거나 그룹핑해볼 수 있다.
+
+
 ### Data leakages
 Data leakages는 간단히 leaks라고도 불리는데, 데이터의 예상치못한 정보로 인해 비현실적으로 좋은 예측을 만드는 경우를 말한다. 직간접적으로 ground truth가 test data에 추가된 경우가 그렇다. 대체로 실수나 사고에 의해 발생된다.
 #### Leaks in time seires
