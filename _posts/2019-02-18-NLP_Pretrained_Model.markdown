@@ -1,5 +1,5 @@
 ---
-title: "NLP Pretrained Model : Bert (1)"
+title: "NLP Pretrained Model : BERT (1)"
 layout: post
 headerImage: false
 category: blog
