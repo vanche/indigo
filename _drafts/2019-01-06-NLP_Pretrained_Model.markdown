@@ -1,5 +1,5 @@
 ---
-title: "NLP Pretrained Model : Bert, GPT, ELMo, ULMFiT, Semi-supervised sequence learning.(1)"
+title: "NLP Pretrained Model : Bert (1)"
 layout: post
 headerImage: false
 category: blog
@@ -30,6 +30,44 @@ NLI, NMT, Vision task에서 supervised task에서 pretrain된 모델의 transfer
 ### Model Architecture
 BERT는 multi-layer Bidirectional Transformer encoder 구조로 되어있다. 최근 transformer가 아주 흔하게 사용되고 bert도 동일한 구조를 사용하기 때문에 논문에서 transformer에 대한 자세한 언급은 생략한다. transformer의 구조에 대해 좀더 자세히 알고싶다면, transformer paper(attention is all you need)나 Annotated transformer(transformer에 대해 코드와 함께 좋은 가이드를 준다.)를 참고할 것. BERT는 parameter를 달리하여 BERT_base와 BERT_large로 구분된다. (BERT_base 모델은 GPT와 동일한 모델사이즈를 가져, 둘을 비교하기 쉽게 한다.) BERT의 transformer와 GPT의 transformer가 다른 점은 BERT쪽은 bidirecitional self-attention 을 취하지만, GPT의 것은 왼쪽 방향만으로 self-attention을 취한다는데 있다. 이 점 때문에 BERT에서는 자신들의 것을 transformer encoder라고 부르고 GPT의 것을 transformer decoder라고 부른다.
 ### Input representaition
+input은 token, segment, position embedding이 합쳐진 구조로 아래 그림과 같다. input은 single text sentence 거나 sentence pair이다.  
+![BERT input representation](../assets/images/bert/bert_input.png)
+
+주요 특징으로 wordpiece embedding을 사용하였고, word piece는 ##으로 구분된다. (transformer와는 다르게) 학습되는 positional embedding을 사용한다. 각 sequence의 첫 토큰은 항상 [CLS](classification embedding)이다. 이 토큰의 final hidden state가 classification task에서 sequence representation을 종합하는데 사용된다. sentence를 구분하기 위해 [SEP]토큰과 segment embedding을 함께 사용한다.  
+### Pretraining Task
+ELMo나 GPT와 다르게 새로운 unsupervised prediction task로 BERT를 pretraining한다.
+#### Task #1: Masked LM  
+기존의 Language Model은 multi-layered context에서 bidirectional할 경우 간접적으로 자신을 볼 수 있게 되기 때문에 (예측해야할 단어의 정보가 들어감) 얕게 left-to-right, right-to-left로 학습될 수 밖에 없었다. 따라서 BERT는 입력의 일부 token을 랜덤하게 마스킹 하고 그 토큰을 예측하는 방식으로 훈련시켜 deep bidirectional representation으로 학습할 수 있도록 하였다. 이를 masked LM으로 명명한다.(이미 이러한 task는 Cloze task로 언급되어왔다.) 실험에서, 전체 wordpiece의 15%를 랜덤하게 마스킹한다. 또한 auto encoder 와는 다르게 전체 input을 재구성하진 않고, 오직 masking된 word만을 예측한다. 그러나 이러한 접근방식에 문제점이 있는데, 바로 masking된 단어가 fine-tunning task에서 나타났을때, mismatch를 일으킬수 있다는 점이다. 이를 해결하기 위해 masking되기로 선택된 단어는 80%는 [MASK]토큰으로 대체되고, 10%는 random word로 대체되며, 나머지 10%로는 그대로 사용한다. (10% 그대로 사용함으로써 실제 word의 representation에 편향되게 한다.) random word로 대체되는 경우는 10%*15% 즉 1.5%의 확률로 일어남으로 전체적인 모델 성능에 영향을 끼치지 않을것이라고 판단했다고 한다.
+* my dog is hairy라는 문장에서 hairy를 masking할 경우  
+  * 80% of time : my dog is hairy → my dog is [MASK]
+  * 10% of time : my dog is hairy → my dog is apple
+  * 10% of time : my dog is hairy → my dog is hairy  
+Masked LM 의 두번째 단점은 수렴하기 위한 시간이 훨씬 더 걸린다는 것이다.
+#### Task #2: Next Sentence prediction
+QA나 NLI task처럼 문장간의 관계에 대한 이해가 필요한 경우, Language Modeling만으로 부족할 수 있다. 그래서 BERT는 Next Sentence Priection task를 pre-training에 추가시켰다. sentence A, B에 대하여 B가 A의 next sentence인지 아닌지에 대한 binary classification을 수행하는데, 50%의 확률로 B가 A의 next sentence가 되도록, 50%의 확률로 B가 A의 next sentence가 아니도록 입력 데이터를 만든다. 이 간단한 task가 얼마나 효과를 보이는지 Ablation study에서 확인한다.
+> **[Example]**
+**Input** = [CLS] the man went to [MASK] store [SEP] he bought a gallon [MASK] milk [SEP]  
+**Label** = IsNext  
+**Input** = [CLS] the man [MASK] to the store [SEP] penguin [MASK] are flight ##less birds [SEP]
+**Label** = NotNext  
+
+### Pre-training Procedure
+Pre-training코퍼스로 BookCorpus와 Enblish Wikipedia 를 사용한다. (book corpus의 경우 현재 사이트에서 제공하지 않아 따로 보존된 데이터를 찾거나 사이트에서 새로 크롤링해야한다.) documnet-level corpus를 사용하는 것이 중요하기 때문에 위키피디아에서 list나 table, header를 무시한다. 상세 사항은 다음과 같다.
+* word piece tokenization후 15%비율로 LM masking
+* sentence A와 B의 token 개수의 합을 512로 제한
+* 100만 step == (33억 word corpus에 대해 40 epochs 학습)
+* adam (bert release된 코드에서 adam decay 사용)
+* L2 decay (0.01)
+* dropout 0.1 all layer
+* gelu activation  
+
+BERT_BASE는 4 Cloud TPUs, Bert_LARGE는 16 Cloud TPUs로 각각 4일씩 학습되었다고 한다. (TPU 당 각각 4TPU chip을 가지고 있고 1TPU chip이  16G memory를 가지니([Google reveals more details about its second-gen TPU AI chips 기사 참고](https://www.theinquirer.net/inquirer/news/3023202/google-reveals-more-details-about-its-second-gen-tpu-ai-chips)) base모델을 학습하기 위해 사용한 memory만 해도 4*64G의 어마어마한 memory가 필요하다. 즉, 구글과 같은 환경을 따라하기도 힘들다.)
+
+### Fine-tuning Prodedure
+
+
+
+
 
 
 *[Open Sourcing BERT](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
