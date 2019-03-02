@@ -42,7 +42,8 @@ ELMo나 GPT와 다르게 새로운 unsupervised prediction task로 BERT를 pretr
   * 80% of time : my dog is hairy → my dog is [MASK]
   * 10% of time : my dog is hairy → my dog is apple
   * 10% of time : my dog is hairy → my dog is hairy  
-Masked LM 의 두번째 단점은 수렴하기 위한 시간이 훨씬 더 걸린다는 것이다.
+Masked LM 의 두번째 단점은 수렴하기 위한 시간이 훨씬 더 걸린다는 것이다.  
+
 #### Task #2: Next Sentence prediction
 QA나 NLI task처럼 문장간의 관계에 대한 이해가 필요한 경우, Language Modeling만으로 부족할 수 있다. 그래서 BERT는 Next Sentence Priection task를 pre-training에 추가시켰다. sentence A, B에 대하여 B가 A의 next sentence인지 아닌지에 대한 binary classification을 수행하는데, 50%의 확률로 B가 A의 next sentence가 되도록, 50%의 확률로 B가 A의 next sentence가 아니도록 입력 데이터를 만든다. 이 간단한 task가 얼마나 효과를 보이는지 Ablation study에서 확인한다.
 > **[Example]**
