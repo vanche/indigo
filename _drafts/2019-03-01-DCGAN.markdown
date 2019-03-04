@@ -1,0 +1,36 @@
+---
+title: "GAN STUDY: DCGAN"
+layout: post
+headerImage: false
+category: blog
+author: huiwon
+---
+GAN을 공부하기 시작할때, 꼭 읽어봐야 할 논문으로 소개되는 [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks(DCGAN)](https://arxiv.org/abs/1511.06434)에 대해 정리한다.
+## 1. Introduction
+저자는 GAN을 훈련시키고 generator와 discriminator network를 지도학습을 위한 feature extractor로 사용하여 good image representation을 얻을 수 있음을 보인다. GAN은 maximum likelihood techniques의 좋은 대안이다. 그러나 GAN의 학습은 불안정하고, 때때로 generator는 터무니없는 결과를 보여주었다. 이 논문에서 주장하는 저자의 contribution은 다음과 같다.
+* 학습에 안정적인 구조인 DCGAN을 제안한다.
+* 학습된 discriminator를 image classification task에 사용하여, 상당한 성능을 확인하였다.
+* GAN에 의해 학습된 필터를 시각화하고, 특정 필터가 특정 object를 그리기 위해 학습됨을 보인다.
+* generator는 생성된 샘플의 의미론적 특성의 조작을 가능하게 하는 산술적 특성을 가지는 벡터를 가지고 있다.
+
+## 2. Related Work
+### Representation Learning from unlabeled data  
+unsupervised representation learning의 고전적인 접근법은 데이터를 클러스터링하고, 이 클러스터를 classification score를 위해 사용하는 것이다. 다른 유명한 방법으로 auto-encoder가 있는데, 이미지를 compact code로 인코딩시키고, 이 코드를 다시 이미지와 가능한 정확하게 재구성하도록 디코딩하는 것이다. 이 방식은 이미지 픽셀에서 좋은 feature representation을 배울 수 있음을 보여준다.  
+
+### Generating natural images  
+이미지 생성모델은 parametric과 non-parametric의 두가지 카테고리로 나눌 수 있다. non-parametric모델은 이미지 데이터베이스에서 매칭을 하거나 texture synthesis, super-resolution, in-painting에 사용되어 왔다. parametric 모델은 광범위하게 탐구되어 왔으나 현재까지 실생활에서 사용될 만한 자연스러운 이미지를 생성하는데에는 실패하였다. variational sampling approach(Kingma&Welling,2013)는 샘플이 흐려지는 문제를 겪었고, GAN(Goodfellow, 2014)은 노이즈와 해석하기 어려운 문제점이 있었다. RNN approach(Gregor el al.,2015)와 deconvolution network approach(Dosoviskiy et al., 2014)는 자연스러운 이미지 생성에 어느정도 성공을 보였지만, 지도학습을 위한 생성자로 활용되지는 못했다.  
+### visualizing the internals of CNNs  
+Neural Network에 대한 계속된 비판은 이것이 블랙박스 방식이란 점이다. 이에 Zeiler는 deconvolution과 maxial activartion을 필터링해서 각 convolution filter가 가지는 목적을 근사치로 보였다. 유사한 방식으로 Mordvintsev는 input에 gradient descent를 사용하여 특정 필터 셋에 활성화 되는 이미지를 조사하였다.  
+
+## 3. Approach and model Architecture  
+DCGAN의 핵심은 CNN구조에서 입증된 세가지 방식을 수정하여 적용한것이다.  
+첫째로 maxpooling과 같은 spatial pooling function을 strided convolution으로 교체하여 네트워크가 spatial downsampling을 학습하게 하였다.  
+둘째, convolutional features의 상단에 존재하는 FC layer를 제거하였다. image  classification SOTA model(Mordvintsev)에서 global average pooling을 사용하였고, 저자는 global average pooling이 수렴속도는 늦추지만, 모델 안정성을 증가시킴을 확인하였다.  
+셋째, Batch Normalization을 사용하여 입력을 zero mean, unit variance를 갖도록 정규화시켜 학습이 안정적이게 하였다. 그러나 모든 레이어에 batch norm을 적용하는 것은 오히려 진동을 일으키거나 model을 불안정하게 만들어 generator의 output layer와 discriminator의 input layer에서는 사용하지 않았다.
+discriminator에서 leaky recified activation이 잘 동작함을 확인하였다. (특히 고해상도 모델링에서...) 이는 original GAN paper와는 대조된다.
+**Architecture guidelines for stable Deep Convolutional GANs**
+* discriminator의 pooling layer를 strided convolutions으로, generator에서는 fractional-strided convolutions(generator)로 바꾼다.
+* batch norm 사용
+* FC layer 제거
+* output layer외의 모든 레이어에서 ReLU 사용
+* discriminator의 모든 레이어에서 LeakyReLu 사용
