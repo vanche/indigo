@@ -14,4 +14,4 @@ For each element x of the input sequence:
   else assign i = i − 1  
 Return m
 ```
-가능한 후보 변수 candidate와 counter 변수 cnt를 정의해보자. 현재 보는 위치에서 candidate가 다시 등장하면 cnt에 1을 더해주고, 다른 variable이 나오면 cnt에서 1을 빼준다. 만약 cnt값이 0이면 candidate는 현재 보는 변수가 된다. 그리고 sequenc를 다 보았을때의 candidate가 majority variable이 된다. 관련문제로 leetcode의 https://leetcode.com/problems/majority-element 가 있다.
+가능한 후보 변수 candidate와 counter 변수 cnt를 정의해보자. 현재 보는 위치에서 candidate가 다시 등장하면 cnt에 1을 더해주고, 다른 variable이 나오면 cnt에서 1을 빼준다. 만약 cnt값이 0이면 candidate는 현재 보는 변수가 된다. 그리고 sequence를 다 보았을때의 candidate가 majority variable이 된다. 관련문제로 leetcode의 https://leetcode.com/problems/majority-element 가 있다.
