@@ -71,3 +71,22 @@ html 파일이 스폰서받은 것인지 아닌지 예측하는 문제. archive 
 organizer는 ml로 관측되지 못한것을 예측하길 원했기에 시그널이 인공적으로 생성되었다. 그러나 시뮬레이션이 완벽하지 못했고 리버스 엔지니어링이 가능했다. 이에 시뮬레이션 결함을 이용하는 모델에 패널티를 주려고 했지만 헛된 시도였다. 누군가 이 결함을 이용해 perfect score를 만들어버렸다.ㄷㄷ
 #### Pairwise tasks
 Quora question pairs competition은 아이템 페어가 중복되었는지 맞추는 대회다. 참가자에게 모든 pair에 대해 예측하라고 하지 않는다. 즉, nonrandom subsampling 이 있고, 이 subsampling이 data leak의 원인이 된다. organizer가 pair를 구별하여 샘플링하기 어렵기 때문에, 아이템 빈도에서 불균형이 발생하고, 좀 더 많이 나온 아이템일수록 중복된 아이템일 가능성이 높다. 또한 각각의 row, column을 item의 번호로 하는 N by N Matrix를 만들어 vector간 유사성을 계산할 수 있다. 즉 같은 이웃을 가진 페어는 중복일 가능성이 높다.
+
+### Visualizations
+데이터에서 흥미로운 정보를 찾는 정해진 레시피는 없다. 시간을 들여 데이터를 보고, 찍어보고, 실험해 봐야한다. 따라서 EDA는 art다. 이 때 사용하는 다양한 시각화 툴이 있다. 첫번째로, histogram으로 표현해 볼 수 있다. 히스토그램은 feature를 bin으로 쪼개므로 모든 feature가 한곳에 모여있게 보이도록 잘못 표현되기도 한다. 이 때엔 feature에 log를 취하여 데이터를 다시 확인할 수 있다. 즉 한번의 plot만으로 결론을 내려서는 안된다. 가정을 있다면, 여러번 다르게 plot하여 이를 증명해야한다. mean값 처럼 특별한 값에 peak가 있는 경우는 organizer가 missing value가 있는 데이터에 평균값을 채워넣은 경우로 이해할 수 있다. 우리는 이 정보를 이용하여, 다시 그 값을 missing value로 채워넣을 수 있다. missing value를 처리하는 boosting알고리즘을 쓸 경우 이들을 볼 수 있을지 모른다. 또는 mean값이 아닌 다른값(-999)으로 채워넣거나 그 값이 missing value였다는걸 가리키는 새로운 new feature를 생성할 수 있다. 두번째 시각화 방법은, x축을 row index로 y축을 feature value로 표현하는 것이다. 만약 수평선을 확인할 수 있다면 feature의 특정값이 많이 반복됨을 의미한다. 수직선이 보인다면 데이터가 제대로 shuffle되지 않은 것이다.
+
+### Dataset cleaning and other things to check
+
+### Reading Materials
+* visualization tools
+[seaborn](https://seaborn.pydata.org/)
+[Plotly](https://plot.ly/python/)
+[Bokeh](https://github.com/bokeh/bokeh)
+[ggplot](http://ggplot.yhathq.com/)
+[Graph visualization with NetworkX](https://networkx.github.io/)
+* others
+[Biclustering algorithms for sorting corrplots](https://scikit-learn.org/stable/auto_examples/bicluster/plot_spectral_biclustering.html)
+[]()
+[]()
+[]()
+[]()
