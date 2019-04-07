@@ -22,6 +22,7 @@ QIQC는 Quora에서 주최한 대회다. Quora는 미국의 지식인같은 사�
 * CV score and LB Score are not correlate: validation set이 test set을 잘 대변할 수 있다고 가정한다면, 이상적으로 CV score와 LB score는 서로 연관성을 보여야한다. 즉 CV score가 이전보다 높게 나왔다면 LB score도 그러한 경향을 따라야한다. 그런데 나뿐만 아니라 대부분의 참가자들이 서로 다른 CV, LB score의 간극에 고통을 겼었다. 보통 이러한 경우 가능한 가설로 첫째는 public test data set이 모델을 평가하기 너무 작을 경우이며, 둘째는 train data와 test data의 distribution이 다를 경우이다.
 <br/>
 * Unstable: 같은 kernel을 제출하였음에도 scoreboard의 결과가 꽤 차이가 날 수 있음이 보고되었다. 즉 같은 모델을 제출해도 public scoreboard의 등수를 재현하지 못하는 경우들이 생겼다. seed값에 따라도 결과가 뒤바뀌는 경우가 생겨서, 좋은 seed를 찾겠다는 참가자도 있었지만 이건 좋은 approach는 아닌 것 같다.  
+ 
 ### 내가 시도해 본 방법  
 위와 같은 이유로 마의 벽 0.7에서 다들 고군분투하였다. 이러한 제한 조건안에서 내가 시도해본 내용들을 적어보자면, 다음과 같다.
 
