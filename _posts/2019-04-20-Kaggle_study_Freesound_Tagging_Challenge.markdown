@@ -41,6 +41,7 @@ coarser feature resolution을 감수하고, Sound 를 쪼개서 가능한한 모
 2. 모델이 예측실패한 샘플의 리스트를 만든다.
 3. 실패한 샘플을 하나씩 확인하여, 더러운 데이터일 경우 블랙리스트에 추가한다.
 4. 안 좋은 샘플이 없을 때까지 위 과정을 반복한다.  
+
 <br>
 ### 모델
 공개된 커널의 모델은 특별한 점은 없다.VGGNet이나 SEResnet을 기본으로 한다.
@@ -48,7 +49,7 @@ coarser feature resolution을 감수하고, Sound 를 쪼개서 가능한한 모
 data를 aubmentation하기 위해 generator에서 사용하는 방법이 재밌는데, 두가지 방법을 사용한다. 하나는 [mixup: BEYOND EMPIRICAL RISK MINIMIZATION](https://arxiv.org/pdf/1710.09412.pdf)이고, 다른 하나는 [random erasing data augmentation](https://arxiv.org/abs/1708.04896)이다.  
 우선 mixup의 코드를 봐보자. 굉장히 간단하고 직관적이다.
 ![mixup_code](../assets/images/kaggle_study_freesound/mixup.png)  
-mixup은 Beta distribution을 따르는 lambda값을 기준으로 두 샘플의 combination을 만들어 사용한다. mixup vicinal distribution은 모델이 학습데이터 중간에서 선형적으로 행동하도록 하는 data augmenation의 형태로 이해될 수 있다. 이 논문의 저자는 linear behaviour가 학습 샘플 외의 것을 예측할때 발생하는 바람직하지 못한 진동(oscillations)을 줄일 수 있다고 주장한다. 또한 선형성(linearity)은 Occam’s razor의 관점에서 good inductive bias이다.[^1]  
+mixup은 Beta distribution을 따르는 lambda값을 기준으로 두 샘플의 combination을 만들어 사용한다. mixup vicinal distribution은 모델이 학습데이터 중간에서 선형적으로 행동하도록 하는 data augmenation의 형태로 이해될 수 있다. 이 논문의 저자는 linear behaviour가 학습 샘플 외의 것을 예측할때 발생하는 바람직하지 못한 진동(oscillations)을 줄일 수 있다고 주장한다. 또한 선형성(linearity)은 Occam’s razor의 관점에서 good inductive bias이다. [^1]  
 다음 그림은 클래스에서 다른 클래스로 선형적으로 변할때, mixup이 좀더 스무스한 예측을 제공함을 보여준다.
 ![mixup_behaviour](../assets/images/kaggle_study_freesound/mixup2.png)  
 
