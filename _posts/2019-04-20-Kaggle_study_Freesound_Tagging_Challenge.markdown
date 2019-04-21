@@ -17,10 +17,10 @@ daisukelab의 best model이었다고 한다. best solution의 경우 두개의 �
 * blacklist에 해당하는 샘플 제거
 * Cross Validation split & balance # of samples
 * train model with data generators
-* evaluate with all train sample
+* evaluate with all train sample  
 <br>
 ###데이터 전처리 전략
-오디오 데이터의 길이가 다르기 때문에, 이를 같은 사이즈의 이미지로 표현하기 위해서 두가지 전략을 취하였다.
+오디오 데이터의 길이가 다르기 때문에, 이를 같은 사이즈의 이미지로 표현하기 위해서 두가지 전략을 취하였다.  
 **Approach LH**
 Sound 시작 부분의 Highest feature resolution을 사용한다.
   → Motivation : 유용한 정보는 주로 샘플의 앞부분에 등장하는 것으로 보인다. 사운드를 기록하는 방법에 대해 생각해 보면, 이 가정은 타당해 보인다. 또한 LH 방식만으로 모델을 학습하였을 때 보인 좋은 결과가 가정을 뒷받침한다.  
