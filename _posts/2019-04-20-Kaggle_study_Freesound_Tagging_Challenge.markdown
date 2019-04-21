@@ -42,7 +42,6 @@ coarser feature resolution을 감수하고, Sound 를 쪼개서 가능한한 모
 3. 실패한 샘플을 하나씩 확인하여, 더러운 데이터일 경우 블랙리스트에 추가한다.
 4. 안 좋은 샘플이 없을 때까지 위 과정을 반복한다.  
 
-<br>
 ### 모델
 공개된 커널의 모델은 특별한 점은 없다.VGGNet이나 SEResnet을 기본으로 한다.
 ### data generator
