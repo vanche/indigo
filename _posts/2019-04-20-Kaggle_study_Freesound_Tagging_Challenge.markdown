@@ -6,8 +6,9 @@ category: blog
 author: huiwon
 ---
 오늘 캐글스터디에서 "Freesound General-Purpose Audio Tagging Challenge"란 주제로 발표를 하기로 하여, ppt를 만드는김에 블로그 포스팅 또한 남기려고 한다. 캐글에서 몇주전 "freesound-audio-tagging-2019"란 주제로 새 컴패티션이 열렸는데, 지난 대회인 이 대회에 대한 공부가 조금이나마 도움이 되지 않을까 싶다.  
-이 포스팅은 주로 디스커션의 [Beyond 0.9, sharing my everything so far (updated 24 July)](https://www.kaggle.com/c/freesound-audio-tagging/discussion/57051#latest-367358)와 여기서 언급하는 [커널](https://www.kaggle.com/daisukelab/freesound-dataset-kaggle-2018-solution)을 참고하여 정리리하였다. 다른 공개solution도 있지만, 특히 이것을 특정지은 이유는 커널의 형태로 잘 정리되어있고, 모델 향상과정을 잘 설명하고 있기때문이다. 참고로, 이 디스커션과 커널의 작성자인 daisukelab는 최종 private leaderboard에서 14등을 기록하였다.
+이 포스팅은 주로 디스커션의 [Beyond 0.9, sharing my everything so far (updated 24 July)](https://www.kaggle.com/c/freesound-audio-tagging/discussion/57051#latest-367358)와 여기서 언급하는 [커널](https://www.kaggle.com/daisukelab/freesound-dataset-kaggle-2018-solution)을 참고하여 정리리하였다. 다른 공개solution도 있지만, 특히 이것을 특정지은 이유는 커널의 형태로 잘 정리되어있고, 모델 향상과정을 잘 설명하고 있기때문이다. 참고로, 이 디스커션과 커널의 작성자인 daisukelab는 최종 private leaderboard에서 14등을 기록하였다.  
 
+<br>
 ## daisukelab의 Kenrel 내용
 daisukelab의 best model이었다고 한다. best solution의 경우 두개의 모델을 더 추가하였다고 언급하였다.
 <br>
@@ -18,6 +19,7 @@ daisukelab의 best model이었다고 한다. best solution의 경우 두개의 �
 * Cross Validation split & balance # of samples
 * train model with data generators
 * evaluate with all train sample  
+
 <br>
 ###데이터 전처리 전략
 오디오 데이터의 길이가 다르기 때문에, 이를 같은 사이즈의 이미지로 표현하기 위해서 두가지 전략을 취하였다.  
@@ -42,6 +44,7 @@ coarser feature resolution을 감수하고, Sound 를 쪼개서 가능한한 모
 3. 실패한 샘플을 하나씩 확인하여, 더러운 데이터일 경우 블랙리스트에 추가한다.
 4. 안 좋은 샘플이 없을 때까지 위 과정을 반복한다.  
 
+<br>
 ### 모델
 공개된 커널의 모델은 특별한 점은 없다.VGGNet이나 SEResnet을 기본으로 한다.
 ### data generator
@@ -57,9 +60,10 @@ random erasing은 더욱 직관적이고 간단하다. 그림에서 임의의 �
 
 또한 커널에서 데이터의 balance를 주기 위하여 오버샘플링도 적용하였다.
 
+<br>
 ## From Discussion
 위의 커널이 daisukelab의 best solution이었다고 한다. 디스커션의 적힌 내용을 좀더 추가한다.
-### Update 24 July
+### Updated 24 July
 참고로 위의 커널이 8월1일에 업데이트된 부분이며, discussion이 여러번 수정된것으로 보인다.  
 daisukelab가 여러 실험과 결과를 분석한 내용이다.
 * test set은 manually verified 샘플만을 포함하기 때문에 트레인 샘플과 차이가 있다. 즉 모델에 feeding하기전 적합한 샘플을 찾는 것이 중요하다. (블랙리스트를 만든 동기로 보인다.)
