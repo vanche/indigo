@@ -75,7 +75,7 @@ daisukelab의 커널과 discussion을 바탕으로 freesound audio tagging 문�
 <br>
 <br>
 ## Reference
-1) [Beyond 0.9, sharing my everything so far (updated 24 July)](https://www.kaggle.com/c/freesound-audio-tagging/discussion/57051#latest-367358)
+1) [Beyond 0.9, sharing my everything so far (updated 24 July)](https://www.kaggle.com/c/freesound-audio-tagging/discussion/57051#latest-367358)  
 2) [freesound-dataset-kaggle-2018-solution Kernel](https://www.kaggle.com/daisukelab/freesound-dataset-kaggle-2018-solution)  
 
 \[^1]: 오컴의 면도날이란 어떤 사실이나 현상을 설명할 때, 논리적이고 가장 단순할수록 진실에 가깝다는 원칙을 말한다.
