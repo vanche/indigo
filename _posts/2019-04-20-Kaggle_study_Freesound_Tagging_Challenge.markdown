@@ -67,8 +67,9 @@ daisukelab가 여러 실험과 결과를 분석한 내용이다.
 * 오디오 전처리는 가능한 많은 정보를 그대로 두는게 좋다.
 * 모델은 길이에 큰 상관 없지만 너무 큰 capacity를 주지 말아라.  
 
-이 때 [Simple CNN Approach](https://www.kaggle.com/daisukelab/simple-cnn-approach에 SEResNet-50을 베이스로 하여 사용하였다고 한다.
+이 때 [Simple CNN Approach](https://www.kaggle.com/daisukelab/simple-cnn-approach에 SEResNet-50을 베이스로 하여 사용하였다고 한다.  
 
+<br>
 ## 결론
 daisukelab의 커널과 discussion을 바탕으로 freesound audio tagging 문제를 어떻게 접근하는지 살펴봤다. 요즘 계속 깨닫는게, 모델에 어떻게 인풋데이터를 좋은 정보로 인코딩하여 보낼지가 성능을 크게 좌우할 수 있다는 것이다. mixup이란 방식도 이번에 알게 됐는데, 굉장히 흥미롭다. ㅎㅎ
 
