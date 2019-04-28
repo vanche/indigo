@@ -4,6 +4,7 @@ layout: post
 headerImage: false
 category: blog
 author: huiwon
+published : false
 sitemap :
   changefreq : daily
   priority : 1.0
