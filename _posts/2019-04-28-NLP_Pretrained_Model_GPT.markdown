@@ -35,16 +35,16 @@ Unsupervised pre-training의 목적은 좋은 initialization point를 찾는 것
 두 단계 학습 과정을 거치며, 첫번째 단계에서 high-capacity language model을 학습하고, 이어서 특정 task에 대하여 라벨링된 데이터로 fine-tunning 단계를 진행한다.
 ### Unsupervised pre-training  
 코퍼스 $\mathcal{U}=${$u_1, ..., u_n$}가 주어지면, 다음의 likelihood를 최대화하는 standard language modeling objective를 사용한다.  
-$$L_1(\mathcal{U})=\sum_{i}\log{P(u_i|u_{i-k},...,u_{i-1};\Theta)}$$  
+<center>$$L_1(\mathcal{U})=\sum_{i}\log{P(u_i|u_{i-k},...,u_{i-1};\Theta)}$$</center>  
 이 때 k는 context window의 크기이고, $\Theta$는 NN의 parameters이다. LM에서는 multi-layer Transformer decoder의 변형을 사용하였다.  
 $U=(u_{-k},...u_{-1})$는 token의 context vector, $n$은 layer 수, $W_e$는 toekn embedding matrix, $W_p$는 position embedding matrix일 때, 다음의 구조를 가진다.  
-$$h_0 = UW_e + W_p$$ $$h_l = transformer block(h_{l-1})\forall{i}\in[1, n]$$ $$P(u)=softmax(h_nW_e^T)$$  
+<center>$$h_0 = UW_e + W_p$$ $$h_l = transformer block(h_{l-1})\forall{i}\in[1, n]$$</center> <center>$$P(u)=softmax(h_nW_e^T)$$</center>  
 
 ###  Supervised fine-tunning  
 LM objective에 대하여 모델을 pretraining한 후, labeld dataset $\mathcal{C}$를 가지는 target task에 대해 parameter를 조정한다. input tokens $x^1,...,x^m$에 해당하는 label y를 예측해야 때, 위 모델의 마지막 트랜스포머 블록의 activation $h_l^m$을 input으로 하는 linear layer를 추가한다.  
-$$P(y|x^1,...,x^m)=softmax(h_l^mW_y)$$ 즉 다음의 objective가 최대가 되도록 학습한다. $$L_2(\mathcal{C})=\sum_{(x,y)}\log{P(y|x^1,...,x^m)}$$  
+<center>$$P(y|x^1,...,x^m)=softmax(h_l^mW_y)$$</center> 즉 다음의 objective가 최대가 되도록 학습한다. <center>$$L_2(\mathcal{C})=\sum_{(x,y)}\log{P(y|x^1,...,x^m)}$$</center>  
 추가적으로 fine-tunning에 auxiliary objective로 LM을 포험하는 것이, supervised model의 generalization을 향상시키고, 모델이 빠르게 수렴하도록하여 학습에 도움이 됨을 확인하였다. 즉 다음의 objective를 최적화한다.  
-$$L3(\mathcal{C}) = L_2(\mathcal{C}) + \lambda*L1(\mathcal{C})$$  
+<center>$$L3(\mathcal{C}) = L_2(\mathcal{C}) + \lambda*L1(\mathcal{C})$$</center>  
 ### Task-specific input transformations  
 각 테스크에 해당하는 입력의 변형은 아래 그림으로 직관적으로 확인할 수 있다.  
 ![GPT architecture](../assets/images/gpt/gpt_architecture.png)  
