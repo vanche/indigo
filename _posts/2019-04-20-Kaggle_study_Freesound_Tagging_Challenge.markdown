@@ -23,16 +23,16 @@ daisukelab의 best model이었다고 한다. best solution의 경우 두개의 �
 <br>
 ###데이터 전처리 전략
 오디오 데이터의 길이가 다르기 때문에, 이를 같은 사이즈의 이미지로 표현하기 위해서 두가지 전략을 취하였다.  
-**Approach LH**
+**Approach LH**  
 Sound 시작 부분의 Highest feature resolution을 사용한다.
   → Motivation : 유용한 정보는 주로 샘플의 앞부분에 등장하는 것으로 보인다. 사운드를 기록하는 방법에 대해 생각해 보면, 이 가정은 타당해 보인다. 또한 LH 방식만으로 모델을 학습하였을 때 보인 좋은 결과가 가정을 뒷받침한다.  
-**Approach X**
+**Approach X**  
 coarser feature resolution을 감수하고, Sound 를 쪼개서 가능한한 모든 부분을 사용한다.
   → Motivation : 만약 중요 정보가 중간이나 끝에 나오는 샘플의 경우, Approach LH는 실패할 수 있다. 따라서 전체 샘플 웨이브를 사용하는 방식 또한 필요하다.  
 
 최종 solution은 Approach X와 Approach LHㄹ도 전처리된 방식 모두 이용하여 emsemble하였다고 한다.  
 
-**Blacklist for making clean train dataset**
+**Blacklist for making clean train dataset**  
 주어지는 학습데이터는 다음의 샘플을 포함한다.
 1. 수동으로 라벨링된 데이터
 2. 라벨과 거의 일치해보이는 clean data
