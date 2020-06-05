@@ -14,7 +14,7 @@ MT-DNN을 접하고 MTL(multi task learning)에 대한 관심이 생기게 되�
 MTL은 joint learning, learning to learn, learning with auxiliary tasks와 같은 이름으로도 언급된다. 즉, 하나보다 많은 loss fuction을 최적화하고자 할때, 이를 MTL한다고 할 수 있다.  
 <br>
 ## 2. Motivation
-multi task learning을 하는 이유에 대해 다양한 방식으로 설명할 수 있다. 우선 생물학적인 관점에서, 새로운 것을 학습할 때 우리는 기존의 알고 있던 관련 정보를 사용한다. 교육학적인 관점에서 보면, 우리는 복잡한 테크닉을 배우기 전에 먼저 필요한 스킬들을 공부하곤 한다. 머신러닝의 관점에서, 우리는 MTL을 inductive transfer로 볼 수 있다. inductive transfer는 모델이 어떤가정을 다른것보다 선호하게하는 inductive bias를 줌으로써 모델의 성능향상을 돕는다. 즉, TML에서 보조 테스크에서 제공받은 inductive bias가 모델이 하나 이상의 task를 설명할 수 있는 가정을 선호하도록 만들어 준다.  
+multi task learning을 하는 이유에 대해 다양한 방식으로 설명할 수 있다. 우선 생물학적인 관점에서, 새로운 것을 학습할 때 우리는 기존의 알고 있던 관련 정보를 사용한다. 교육학적인 관점에서 보면, 우리는 복잡한 테크닉을 배우기 전에 먼저 필요한 스킬들을 공부하곤 한다. 머신러닝의 관점에서, 우리는 MTL을 inductive transfer로 볼 수 있다. inductive transfer는 모델이 어떤가정을 다른것보다 선호하게하는 inductive bias를 줌으로써 모델의 성능향상을 돕는다. 즉, MTL에서 보조 테스크에서 제공받은 inductive bias가 모델이 하나 이상의 task를 설명할 수 있는 가정을 선호하도록 만들어 준다.  
 <br>
 ## 3. TWO MTL methods for deep learning  
 ![Hard parameter sharing](../assets/images/mtl/figure1.png)
